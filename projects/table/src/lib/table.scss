@@ -1,0 +1,17 @@
+::ng-deep .mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+    box-shadow: 4px 0 8px -5px rgba(0, 0, 0, 0.15);
+}
+
+::ng-deep .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+    box-shadow: -4px 0px 8px -3px rgba(0, 0, 0, 0.15);
+}
+
+::ng-deep .mat-column-robinhubTableActions {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    flex: 0 1 56px;
+    justify-content: center;
+} 
+

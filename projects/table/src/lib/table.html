@@ -1,0 +1,43 @@
+<mat-table [ngClass]="_tableHelper.tableClass" [ngStyle]="_tableHelper.tableStyle" [dataSource]="dataSource">
+    <ng-container *ngFor="let column of _tableHelper.columns" matColumnDef="{{column.id}}"
+        [sticky]="_tableHelper.isColumnStickyStart(column)" [stickyEnd]="_tableHelper.isColumnStickyEnd(column)">
+        <mat-header-cell [ngClass]="_tableHelper.getColumnHeaderClass(column)" *matHeaderCellDef>
+            <button *ngIf="_tableHelper.filtrable" mat-icon-button class="w-20 h-20" [matMenuTriggerFor]="filterMenu"
+                [matMenuTriggerData]="{column:column}">
+                <mat-icon class="s-16 mb-20 ">search</mat-icon>
+            </button>
+            <span>{{column.header|translate}}</span>
+            <span mat-sort-header *ngIf="_tableHelper.sortable">
+                <mat-icon class="s-16">unfold_more</mat-icon>            
+            </span>
+            
+        </mat-header-cell>
+        <mat-cell [ngClass]="_tableHelper.getColumnCellClass(column)" *matCellDef="let row">
+            {{_tableHelper.getColumnCell(row,column)}} </mat-cell>
+    </ng-container>
+    <ng-container *ngIf="_tableHelper.actions" matColumnDef="robinhubTableActions" stickyEnd>
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{row:row}">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="_tableHelper.columnDefs; sticky: true"></mat-header-row>
+    <mat-row (click)="doRowClick(row)" *matRowDef="let row; columns: _tableHelper.columnDefs;"></mat-row>
+</mat-table>
+<mat-menu #menu="matMenu">
+    <ng-template matMenuContent let-row="row">
+        <button *ngFor="let action of _tableHelper.actions" mat-menu-item (click)="doAction(action,row)">
+            <mat-icon>{{action.icon}}</mat-icon>
+            <span>{{action.text|translate}}</span>
+        </button>
+    </ng-template>
+</mat-menu>
+<mat-menu #filterMenu="matMenu">
+    <ng-template matMenuContent let-column="column">
+        <input matInput mat-menu-item (click)="$event.stopPropagation()" (keyup)="doFilter(column,$event)"
+            placeholder="{{column.header|translate}}">
+    </ng-template>
+</mat-menu>
