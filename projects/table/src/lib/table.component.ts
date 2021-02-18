@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { RobinHubTableDataSource } from './table-datasource';
-import { RobinHubTableHelper, TableColumn, TableProperties } from './table-helper';
+import { RobinHubTableDataSource } from './table.datasource';
+import { RobinHubTableHelper, TableColumn, TableProperties } from './table.helper';
 @Component({
   selector: 'robinhub-table',
   styleUrls: ['table.scss'],
