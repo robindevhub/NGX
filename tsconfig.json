@@ -21,7 +21,10 @@
     ],
     "paths": {
       "table": [
-        "dist/component/table",
+        "dist/component/table"
+      ],
+      "ace": [
+        "dist/component/ace"
       ]
     }
   },
